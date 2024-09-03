@@ -1,0 +1,25 @@
+<div class="slides-container">
+	<div class="slide-list">
+		<div *ngFor="let slide of slides()" class="slide-item" [class.selected]="slide === selectedSlide()"
+			(click)="selectSlide(slide)">
+			<p>
+				{{ slide.id }}
+			</p>
+			<img width="200px" [src]="slide.imageUrl" alt="Selected Slide">
+		</div>
+	</div>
+	<div class="slide-view">
+
+		
+
+		<img [src]="selectedSlide().imageUrl" alt="Selected Slide" id="container-id"
+			data-velt-target-inline-comment-element-id="container-id">
+
+		<velt-comments-sidebar page-mode="true"></velt-comments-sidebar>
+		<div class="toolbar">
+			<input type="text" placeholder="Add Slide Note" [(ngModel)]="selectedSlide().note">
+			
+		</div>
+
+	</div>
+</div>
