@@ -12,6 +12,8 @@ import { ToolbarComponent } from "./component/toolbar/toolbar.component";
 	imports: [CommonModule, RouterOutlet, DocumentComponent, ToolbarComponent],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
+
+	// Schemas are required to add Velt html tags
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppComponent implements OnInit {
@@ -23,16 +25,14 @@ export class AppComponent implements OnInit {
 	) { }
 
 	async ngOnInit(): Promise<void> {
-		// Follow the Setup Guide for more info: https://docs.velt.dev/get-started/setup/install
-
+		
+		// Initialize Velt with the API key
 		await this.veltService.initializeVelt('AN5s6iaYIuLLXul0X4zf');
 
-		const user = this.authService.getUser()(); // Getting Random User
+		// Identify the current user if authenticated
+		const user = this.authService.userSignal();
 		if (user) {
 			await this.veltService.identifyUser(user);
 		}
-
-		await this.veltService.setDocument('slides', { documentName: 'slides' });
-		this.veltService.setDarkMode(true);
 	}
 }
