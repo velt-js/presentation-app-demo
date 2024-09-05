@@ -46,23 +46,25 @@ export class DocumentComponent {
 			this.client = this.veltService.clientSignal();
 
 			this.client?.setLocation({ id: String(this.selectedSlide().id), locationName: "Slide " + (this.selectedSlide().id) })
-			
+
 			if (this.client) {
-				
+
 				// Contain your comments in a document by setting a Document ID & Name
 				this.client.setDocument('slides', { documentName: 'slides' });
-				
+
 				// Enable dark mode for Velt UI
 				this.client.setDarkMode(true);
-				
+
 				// When comment is clicked in sidebar we set the active slide
 				const sidebar = document.querySelector('velt-comments-sidebar');
 				sidebar?.addEventListener("onCommentClick", (e: any) => {
 					const id = Number(e.detail.location.id)
 					this.selectedSlide.set(this.slides()[id - 1])
-					this.client?.setLocation({ id: String(this.selectedSlide().id)})
+					
+					// Set location based on selected comment slide id
+					this.client?.setLocation({ id: String(this.selectedSlide().id) })
 				})
-				
+
 			}
 		});
 	}
