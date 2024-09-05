@@ -37,10 +37,16 @@ export class DocumentComponent {
 	constructor(
 		private veltService: VeltService
 	) {
+		// Initialize selectedSlide to the first slide
+		this.selectedSlide.set(this.slides()[0]);
+
 		// Set Document when the velt client is initialized
 		effect(() => {
 
 			this.client = this.veltService.clientSignal();
+
+			this.client?.setLocation({ id: String(this.selectedSlide().id), locationName: "Slide " + (this.selectedSlide().id) })
+
 			if (this.client) {
 
 				// Contain your comments in a document by setting a Document ID & Name
@@ -54,6 +60,7 @@ export class DocumentComponent {
 
 	selectSlide(slide: Slide) {
 		this.selectedSlide.set(slide);
+		this.client?.setLocation({ id: String(slide.id), locationName: "Slide " + (slide.id) })
 	}
 
 }
