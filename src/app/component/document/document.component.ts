@@ -65,6 +65,9 @@ export class DocumentComponent {
 					this.client?.setLocation({ id: String(this.selectedSlide().id) })
 				})
 
+				// Only Allow Commenting on the selected slide
+				this.client?.getCommentElement().allowedElementClassNames(['slide-view'])
+
 			}
 		});
 	}
