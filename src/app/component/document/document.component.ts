@@ -62,7 +62,7 @@ export class DocumentComponent {
 					this.selectedSlide.set(this.slides()[id - 1])
 					
 					// Set location based on selected comment slide id
-					this.client?.setLocation({ id: String(this.selectedSlide().id) })
+					this.client?.setLocation({ id: String(this.selectedSlide().id), locationName: "Slide " + (this.selectedSlide().id) })
 				})
 
 				// Only Allow Commenting on the selected slide
